@@ -34,18 +34,18 @@ public class EnemyController : MonoBehaviour
     {
         GameObject obj = Instantiate(explosion, transform.position, Quaternion.identity);
 
-        Destroy(this.gameObject,0.3f);
-        Destroy(obj, 1.5f);
+        Destroy(this.gameObject,0.2f);
+        Destroy(obj, 1.4f);
     }
 
     //Las funciones de abajo son llamadas por el script In Range de Turret
-    public void enemyInRange(GameObject p_target)
+    public void EnemyInRange(GameObject p_target)
     {
             t_system.SetTarget(p_target);
             s_system.SetTarget(p_target);
     }
 
-    public void enemyOutOfRange()
+    public void EnemyOutOfRange()
     {
             t_system.SetTarget(null);
             s_system.SetTarget(null);

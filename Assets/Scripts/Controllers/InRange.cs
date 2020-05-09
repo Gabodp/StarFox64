@@ -15,7 +15,7 @@ public class InRange : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            controller.enemyInRange(other.gameObject);
+            controller.EnemyInRange(other.gameObject);
         }
     }
 
@@ -23,7 +23,7 @@ public class InRange : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            controller.enemyOutOfRange();
+            controller.EnemyOutOfRange();
         }
     }
 }
