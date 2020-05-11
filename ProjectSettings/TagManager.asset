@@ -9,6 +9,7 @@ TagManager:
   - Turret
   - Collectible
   - Enemy
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Lighting
   - Ground
   - Postprocessing
-  - 
+  - Player
   - 
   - 
   - 

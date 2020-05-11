@@ -13,13 +13,15 @@ public class PlayerController : MonoBehaviour
     public CinemachineDollyCart dolly_cart;
     public float speed;
     private readonly float lookSpeed = 8000;
-    private float moveForwardSpeed = 12;
+    private float moveForwardSpeed = 12.0f;
 
     public Transform aimTargetRotation;
     public Transform aimTarget;
     private PlayerShootingSystem s_system;
+    private Rigidbody rb;
     private int right;
     private int left;
+
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         right = 0;
         left = 0;
         dolly_cart.m_Speed = moveForwardSpeed;
+        rb = GetComponent<Rigidbody>();
 
     }
     void Update()
@@ -35,7 +38,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        LocalMove(horizontal, vertical, speed);
+        XY_Move(horizontal, vertical, speed);
         RotationLook(horizontal, vertical, lookSpeed);
         HorizontalLean(player, horizontal, 60, .1f);
         KeyBoardInput();
@@ -65,15 +68,24 @@ public class PlayerController : MonoBehaviour
             SpeedUp(true);
         if (Input.GetKeyUp(KeyCode.LeftShift))
             SpeedUp(false);
-            
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+            Brake(true);
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+            Brake(false);
+        /*if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            transform.localPosition = Vector3.zero;
+        }*/
     }
 
 
 
-    void LocalMove(float x, float y, float speed)
+    void XY_Move(float x, float y, float speed)
     {
         transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
-        ClampPosition();
+        ClampPos();
 
         if (right == 2)
             BarrelRoll(1);
@@ -81,12 +93,12 @@ public class PlayerController : MonoBehaviour
             BarrelRoll(-1);
     }
 
-    void ClampPosition()
+    void ClampPos()
     {
-        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        pos.x = Mathf.Clamp01(pos.x);
-        pos.y = Mathf.Clamp01(pos.y);
-        transform.position = Camera.main.ViewportToWorldPoint(pos);
+        Vector3 position = Camera.main.WorldToViewportPoint(transform.position);
+        position.x = Mathf.Clamp(position.x,0.08f,0.92f);
+        position.y = Mathf.Clamp(position.y,0.08f,0.92f);
+        transform.position = Camera.main.ViewportToWorldPoint(position);
     }
 
     void RotationLook(float h, float v, float speed)
@@ -104,16 +116,20 @@ public class PlayerController : MonoBehaviour
 
     private void SpeedUp(bool activated)
     {
-        float speed = activated ? moveForwardSpeed * 3 : moveForwardSpeed;
+        float newForwardSpeed = activated ? moveForwardSpeed * 2 : moveForwardSpeed;
+        float zoom = activated ? -4 : 0;
 
-        DOVirtual.Float(dolly_cart.m_Speed, speed, .15f, SetForwardSpeed);
+        DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
+        GameController.Instance.SetCameraZoom(zoom, 0.5f);
     }
 
     private void Brake(bool activated)
     {
-        float speed = activated ? moveForwardSpeed / 3 : moveForwardSpeed;
+        float newForwardSpeed = activated ? moveForwardSpeed * 0.60f : moveForwardSpeed;
+        float zoom = activated ? 2 : 0;
 
-        DOVirtual.Float(dolly_cart.m_Speed, speed, .15f, SetForwardSpeed);
+        DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
+        GameController.Instance.SetCameraZoom(zoom, 0.3f);
     }
 
     void BarrelRoll(int direction)
@@ -121,21 +137,35 @@ public class PlayerController : MonoBehaviour
         if (!DOTween.IsTweening(player))
         {
             player.DOLocalRotate(new Vector3(player.localEulerAngles.x, player.localEulerAngles.y, 360 * -direction), 0.6f, RotateMode.LocalAxisAdd).SetEase(Ease.OutSine);
-            right= 0;
+            right = 0;
             left = 0;
         }
     }
 
-    void SetForwardSpeed(float x)
+    void SetForwardSpeed(float newSpeed)
     {
-        dolly_cart.m_Speed = x;
+        dolly_cart.m_Speed = newSpeed;
     }
 
-    /*private void OnDrawGizmos()
+    private void OnCollisionEnter(Collision collision)
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(aimTargetRotation.position, .5f);
-        Gizmos.DrawSphere(aimTargetRotation.position, .15f);
+        print(collision.gameObject.name);
 
-    }*/
+        //rb.velocity = Vector3.zero;
+        Sequence mySequence = DOTween.Sequence();
+        mySequence.Append(transform.DOLocalMove(Vector3.zero, 1.5f));
+        mySequence.Insert(0,transform.DOLocalRotate(Vector3.zero, 1.5f));
+        mySequence.OnComplete(StopRotating);
+        mySequence.Play();
+
+    }
+
+    private void StopRotating()
+    {
+        print("Termino el tween");
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        //transform.localPosition = Vector3.zero;
+    }
+
 }

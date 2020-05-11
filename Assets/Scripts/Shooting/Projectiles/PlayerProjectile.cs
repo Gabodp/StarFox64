@@ -31,7 +31,7 @@ public class PlayerProjectile : BaseProjectile
         if(other.gameObject.tag == "Enemy")
         {
             print("Choco con enemigo");
-            other.gameObject.GetComponentInParent<EnemyController>().lifePoints -= 10;
+            other.gameObject.GetComponentInParent<EnemyController>().ReceiveDamage(10);
             Destroy(this.gameObject);
         }
         

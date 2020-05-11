@@ -30,7 +30,7 @@ public class RingCollectible : Collectible
     }
     public override void DoAction()
     {
-        GameController.Instance.setLifePoints(lifeRegenerated);
+        GameController.Instance.SetLifePoints(lifeRegenerated);
     }
 
     public override void DoAnimation()

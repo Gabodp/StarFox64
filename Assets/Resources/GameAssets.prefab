@@ -46,3 +46,5 @@ MonoBehaviour:
   soundsArray:
   - sound: 0
     audio: {fileID: 8300000, guid: d590b4e73da76c64f929843548f04421, type: 3}
+  - sound: 2
+    audio: {fileID: 8300000, guid: 8b4f0ec3046456a44bd3652172896ada, type: 3}

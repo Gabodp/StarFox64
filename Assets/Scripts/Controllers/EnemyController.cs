@@ -12,28 +12,26 @@ public class EnemyController : MonoBehaviour
 
     private EnemyShootingSystem s_system;
     private TrackingSystem t_system;
-
+    private int baseLifePoints;
     // Start is called before the first frame update
     protected virtual void Start()
     {
         s_system = GetComponentInChildren<EnemyShootingSystem>();
         t_system = GetComponentInChildren<TrackingSystem>();
+        baseLifePoints = lifePoints;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (lifePoints <= 0)
-        {
-            Explode();
-        }
             
     }
 
     protected void Explode()
     {
+        print("Explota");
         GameObject obj = Instantiate(explosion, transform.position, Quaternion.identity);
-
+        AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion);
         Destroy(this.gameObject,0.2f);
         Destroy(obj, 1.4f);
     }
@@ -49,6 +47,20 @@ public class EnemyController : MonoBehaviour
     {
             t_system.SetTarget(null);
             s_system.SetTarget(null);
-            s_system.RemoveLastProjectiles();//ENCARGADO DE BORRAR GAMEOBJECTS BALAS
+            //s_system.RemoveLastProjectiles();//ENCARGADO DE BORRAR GAMEOBJECTS BALAS
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        if (lifePoints > 0)
+        {
+            lifePoints -= damage;
+            lifePoints = Mathf.Clamp(lifePoints, 0, baseLifePoints);
+        }
+        
+        if(lifePoints == 0) 
+            Explode();
+
+            
     }
 }

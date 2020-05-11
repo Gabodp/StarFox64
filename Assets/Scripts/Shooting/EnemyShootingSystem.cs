@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyShootingSystem : BaseShootingSystem
 {
+    private void Start()
+    {
+        fireTimer = fireRate;//Para tener cargada la primera bala
+    }
 
-    // Update is called once per frame
     void Update()
     {
         if (!target)

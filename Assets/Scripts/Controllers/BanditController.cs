@@ -19,6 +19,7 @@ public class BanditController : EnemyController
     {
         base.Start();
         IdleAnimation();
+        idle = true;
     }
 
     protected override void Update()

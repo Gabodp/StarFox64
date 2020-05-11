@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+using DG.Tweening;
+using Cinemachine;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
+    public bool godMode;
+    public GameObject CameraHolder;
 
     private int lifePoints;
     private float tiempo;
@@ -24,6 +27,7 @@ public class GameController : MonoBehaviour
     {
         lifePoints = 80;
         tiempo = 0;
+        godMode = false;
 
     }
 
@@ -31,11 +35,25 @@ public class GameController : MonoBehaviour
     void Update()
     {
         tiempo += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.G))
+            godMode = !godMode;
     }
 
-    public void setLifePoints(int value)
+    public void SetLifePoints(int value)
     {
+        if (godMode) return;
+
         this.lifePoints = Mathf.Clamp(this.lifePoints + value, 0, 100);
     }
 
+    public void SetCameraZoom(float zoom, float duration)
+    {
+        CameraHolder.transform.DOLocalMove(new Vector3(0, 0, zoom), duration);
+    }
+
+    void FieldOfView(float fov)
+    {
+        CameraHolder.GetComponentInChildren<CinemachineVirtualCamera>().m_Lens.FieldOfView = fov;
+    }
 }
