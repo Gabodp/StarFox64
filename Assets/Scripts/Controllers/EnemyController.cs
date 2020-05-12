@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
         s_system = GetComponentInChildren<EnemyShootingSystem>();
         t_system = GetComponentInChildren<TrackingSystem>();
         baseLifePoints = lifePoints;
+
     }
 
     // Update is called once per frame

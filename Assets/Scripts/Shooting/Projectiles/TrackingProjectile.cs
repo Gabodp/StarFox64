@@ -8,16 +8,17 @@ public class TrackingProjectile : BaseProjectile
     private GameObject target;
     private float timer;
     private float timestamp;
-
-    public GameObject explosion;
-
     private Vector3 direction;
     private Quaternion lookRotation;
+    private float rotateSpeed;
+
+    public GameObject explosion;
 
     private void Start()
     {
         timestamp = 0.0f;
         timer = 6.0f;
+        rotateSpeed = 6.0f;
     }
 
     private void Update()
@@ -27,22 +28,26 @@ public class TrackingProjectile : BaseProjectile
         {
             timestamp += Time.deltaTime;
 
-            direction = (target.transform.position - transform.position);
-            lookRotation = Quaternion.LookRotation(direction);
+            direction = (target.transform.position - transform.position).normalized;
 
+            lookRotation = Quaternion.LookRotation(direction);
+            
             if (timestamp >= 1.2f)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 10.0f * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+
+                if (timestamp >= timer)
+                    Explode();
             }
             else
             {
                 transform.position += Vector3.up * speed * 0.6f * Time.deltaTime;
             }
+            
         }
         
-        if (timestamp >= timer)
-            Explode();
+        
     }
 
     public override void FireProjectile(GameObject launcher, GameObject target, int damage, float shootingSpeed)
@@ -53,9 +58,23 @@ public class TrackingProjectile : BaseProjectile
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            print("Entro");
+            Explode();
+            target = null;
+        }
+            
+
+    }
     private void Explode()
     {
         GameObject explosionObject = Instantiate(explosion, transform.position, Quaternion.identity);
+
+        //Agregar shake a la camara
+        GameController.Instance.ShakeCamera(4.0f, 1f);
         Destroy(gameObject);
         Destroy(explosionObject, 1.5f);
     }

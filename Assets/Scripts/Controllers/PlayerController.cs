@@ -149,8 +149,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.name);
-
         //rb.velocity = Vector3.zero;
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOLocalMove(Vector3.zero, 1.5f));

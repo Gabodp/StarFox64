@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
     public bool godMode;
     public GameObject CameraHolder;
+    public CameraShake CameraShaker;
 
     private int lifePoints;
     private float tiempo;
@@ -55,5 +56,10 @@ public class GameController : MonoBehaviour
     void FieldOfView(float fov)
     {
         CameraHolder.GetComponentInChildren<CinemachineVirtualCamera>().m_Lens.FieldOfView = fov;
+    }
+
+    public void ShakeCamera(float magnitude , float duration)
+    {
+        CameraShaker.ShakeCamera(magnitude, duration);
     }
 }
