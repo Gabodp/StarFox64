@@ -5,34 +5,33 @@ using UnityEngine;
 public class FighterSpawner : MonoBehaviour
 {
     public float spawnRate;
-    public int maxFighters;
-    public GameObject fighterPrefab;
+    public GameObject fighterPrefab; 
+    public GameObject[] spawnList;
 
-    private float spawnTimestamp;
-    private int currentFighters;
-    // Start is called before the first frame update
-    void Start()
-    {
-        spawnTimestamp = 0.0f;
-        currentFighters = 0;
-    }
+    private bool isSpawning = false;
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator SpawnFighters()
     {
-        spawnTimestamp += Time.deltaTime;
-        if(spawnTimestamp >= spawnRate && currentFighters < maxFighters)
-        {          
-            spawnTimestamp = 0.0f;
-            SpawnFighter();
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            foreach (GameObject spawn in spawnList)
+            {
+                GameObject s_fighter = Instantiate(fighterPrefab, spawn.transform.position, spawn.transform.rotation) as GameObject;
+                s_fighter.GetComponent<FighterController>().SetDirection(spawn.transform.forward);
+
+                yield return new WaitForSeconds(spawnRate);
+            }
+            isSpawning = false;
         }
+        yield break;
     }
 
-    private void SpawnFighter()
+    private void OnTriggerEnter(Collider other)
     {
-        currentFighters++;
-        GameObject s_fighter = Instantiate(fighterPrefab, transform.position, transform.rotation) as GameObject;
-        s_fighter.GetComponent<FighterController>().SetDirection(transform.forward);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(SpawnFighters());
+        }   
     }
-
 }

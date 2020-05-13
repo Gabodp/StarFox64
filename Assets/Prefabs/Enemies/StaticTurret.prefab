@@ -97,7 +97,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8908503255632851544}
   - component: {fileID: 8908503255632851545}
-  - component: {fileID: 1783976147}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -137,24 +136,6 @@ MonoBehaviour:
   xAxisFOV: 0
   yAxisFOV: 180
   zAxisFOV: 0
---- !u!114 &1783976147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8908503255632851547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032775c1878573d44a4e4577417cc3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRate: 10
-  damage: 5
-  projectile: {fileID: 331233373043139760, guid: 2f09df8224ec7474c9f9e1603df095c4,
-    type: 3}
-  projectileSpawns:
-  - {fileID: 1350996854}
 --- !u!1 &8908503256655611249
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,9 +145,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8908503256655611254}
-  - component: {fileID: 8908503256655611251}
+  - component: {fileID: 9104164961953555106}
   - component: {fileID: 1290479099}
-  m_Layer: 0
+  - component: {fileID: 4453353375013415146}
+  m_Layer: 13
   m_Name: StaticTurret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -189,7 +171,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8908503256655611251
+--- !u!114 &9104164961953555106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,12 +180,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8908503256655611249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82cfda4ff4149c34c928f1931f9582a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fd45779398fe3246b412c179a544371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 80
-  scoreValue: 0
-  targetable: 1
+  scoreValue: 4
   explosion: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
 --- !u!65 &1290479099
 BoxCollider:
@@ -218,6 +199,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 6, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4453353375013415146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8908503256655611249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032775c1878573d44a4e4577417cc3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 10
+  damage: 5
+  projectile: {fileID: 331233373043139760, guid: 2f09df8224ec7474c9f9e1603df095c4,
+    type: 3}
+  projectileSpawns:
+  - {fileID: 1350996854}
 --- !u!1001 &8908503256865054825
 PrefabInstance:
   m_ObjectHideFlags: 0

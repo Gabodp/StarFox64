@@ -27,7 +27,6 @@ public class TrackingSystem : MonoBehaviour
         angles = Vector3.zero;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(target != null)

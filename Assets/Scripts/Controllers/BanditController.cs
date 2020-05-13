@@ -12,19 +12,14 @@ public class BanditController : EnemyController
     public float zDistance;
 
     private const float timeToLeave = 6.0f;
-    private bool idle;
     private Sequence mySequence;
+    private TrackingSystem t_system;
 
     protected override void Start()
     {
         base.Start();
         IdleAnimation();
-        idle = true;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
+        t_system = GetComponentInChildren<TrackingSystem>();
     }
 
     private void DoAnimation()
@@ -40,7 +35,6 @@ public class BanditController : EnemyController
         {
             mySequence = DOTween.Sequence();
             mySequence.SetLoops<Sequence>(-1,LoopType.Restart);
-            //mySequence.SetDelay<Sequence>(0.2f);
             mySequence.Append(transform.DOLocalMoveY(transform.localPosition.y + 0.8f,0.8f));
             mySequence.Append(transform.DOLocalMoveY(transform.localPosition.y, 0.8f));
 
@@ -53,7 +47,7 @@ public class BanditController : EnemyController
     {
         mySequence.Kill();
         DoAnimation();
-        base.EnemyInRange(player.transform.gameObject);
+        t_system.SetTarget(player);
         transform.SetParent(player.transform.parent);
     }
 

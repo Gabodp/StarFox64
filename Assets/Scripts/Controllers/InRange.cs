@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class InRange : MonoBehaviour
 {
-    private EnemyController controller;
+    private TurretController controller;
 
     private void Start()
     {
-        controller = transform.parent.GetComponent<EnemyController>();
+        controller = transform.parent.GetComponent<TurretController>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.CompareTag("Player"))
         {
             controller.EnemyInRange(other.gameObject);
         }
@@ -21,7 +21,7 @@ public class InRange : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.CompareTag("Player"))
         {
             controller.EnemyOutOfRange();
         }

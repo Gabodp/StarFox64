@@ -6,51 +6,63 @@ public class FighterController : EnemyController
 {
     private Rigidbody rb;
     private Vector3 direction;
-    private bool alive;
 
+    public float speed;
     public GameObject model;
     public GameObject smokeParticles;
     public GameObject smokeParticlesPosition;
 
-    public float speed;
+    private float timestamp;
+    private readonly float lifeTime = 10.0f;
     protected override void Start()
     {
         base.Start();
-        alive = true;
         rb = GetComponent<Rigidbody>();
-        GetComponentInChildren<EnemyShootingSystem>().SetTarget(gameObject);//Deberia ser el player pero para este caso no importa, con tal que no sea null
+        s_system.SetTarget(gameObject);//Should be player but it doesnt matter here, just avoid being null
+
+        timestamp = 0.0f;
     }
 
-    protected override void Update()
+    private void Update()
     {
         //We implement our own Update for this type of enemy
-        //base.Update();
-        if(lifePoints <= 0 && alive)
+        timestamp += Time.deltaTime;
+
+        if (timestamp >= lifeTime)
+            Destroy(gameObject);
+        else
         {
-            rb.useGravity = true;
-            speed *= 0.85f;
-            MayDayAnimation();
+            transform.position += direction * (speed * Time.deltaTime);
         }
-        transform.position += direction * (speed * Time.deltaTime);
+        
     }
 
-    private void MayDayAnimation()
+    protected override void ExplodeSequence()
     {
-        alive = false;
+        print("Llamada al hijo explode sequence");
+        rb.useGravity = true;
+        speed *= 0.9f;
+
+        /*MayDay Animation*/
         GameObject obj = Instantiate(smokeParticles, smokeParticlesPosition.transform.position, Quaternion.identity);
         obj.transform.parent = transform;
         Destroy(obj, 2.0f);
         if (!DOTween.IsTweening(model.transform))
         {
-            model.transform.DORotate(new Vector3(model.transform.eulerAngles.x, model.transform.eulerAngles.y, 540), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutSine).OnComplete(Explode);
-            //transform.DOLocalRotate(new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 540), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutSine).OnComplete(Explode);
-
+            model.transform.DORotate(new Vector3(model.transform.eulerAngles.x, model.transform.eulerAngles.y, 540), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutSine).OnComplete(base.ExplodeSequence);
         }
 
     }
+
 
     public void SetDirection(Vector3 dir)
     {
         direction = dir;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print(collision.gameObject.name);
+    }
+
 }
