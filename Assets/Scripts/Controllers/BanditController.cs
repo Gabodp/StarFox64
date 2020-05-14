@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
@@ -48,6 +47,7 @@ public class BanditController : EnemyController
         mySequence.Kill();
         DoAnimation();
         t_system.SetTarget(player);
+        s_system.SetTarget(player);
         transform.SetParent(player.transform.parent);
     }
 

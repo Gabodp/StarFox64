@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class TrackingSystem : MonoBehaviour
@@ -46,12 +45,10 @@ public class TrackingSystem : MonoBehaviour
                 angles = transform.localEulerAngles;
 
                 //Rotation Restrictions
-                //angles.x = Mathf.Clamp(angles.x,0.0f, 45.0f);
-                //angles.x = 0.0f;
                 angles.x = Mathf.Clamp(angles.x, transform.localEulerAngles.x - xAxisFOV/2, transform.localEulerAngles.x + xAxisFOV/2);
                 angles.y = Mathf.Clamp(angles.y, transform.localEulerAngles.y - yAxisFOV/2, transform.localEulerAngles.y + yAxisFOV/2);
                 angles.z = Mathf.Clamp(angles.z, transform.localEulerAngles.z - zAxisFOV/2, transform.localEulerAngles.z + zAxisFOV/2);
-
+                print(angles);
                 transform.localEulerAngles = angles;
                 
             }

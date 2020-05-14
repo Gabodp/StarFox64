@@ -10,32 +10,46 @@ public static class AudioManager
         PlayerLaser,
         EnemyLaser,
         DestroyExplosion,
+        RingCollected,
+        Background,
+        Interruption,
+        WarningAlarm,
+        Phase2Giorno,
     }
 
     //El diccionario puede cambiarse para que albergue una clase con config especifica de cada sonido
     private static Dictionary<Sound, float> soundTimerDictionary;
     private static GameObject u_AudioGameObject;
     private static AudioSource u_AudioSource;
+
+    private static GameObject backgroundAudioObject;
+    private static AudioSource backgroundAudioSource;
+
     public static void Initialize()
     {
-        soundTimerDictionary = new Dictionary<Sound, float>();
-        /* Aqui debajo inicializar los timers de todos los sonidos que los requieran.
-           En otras palabras, todos los "cases" del switch dentro de canPlay().
-           Deben haber minimo el mismo numero de inicializaciones que de cases.*/
+        soundTimerDictionary = new Dictionary<Sound, float>
+        {
+            /* Aqui debajo inicializar los timers de todos los sonidos que los requieran.
+               En otras palabras, todos los "cases" del switch dentro de canPlay().
+               Deben haber minimo el mismo numero de inicializaciones que de cases.*/
 
-        soundTimerDictionary[Sound.PlayerLaser] = 0.0f;
-        soundTimerDictionary[Sound.EnemyLaser] = 0.0f;
+            [Sound.PlayerLaser] = 0.0f,
+            [Sound.EnemyLaser] = 0.0f
+        };
     }
 
     public static void PlaySound(Sound sound, Vector3 pos, float radius)
     {
-        if (canPlay(sound))
+        if (CanPlay(sound))
         {
             GameObject soundObject = new GameObject("Sound");
             soundObject.transform.position = pos;
             AudioSource audioSource = soundObject.AddComponent<AudioSource>();
-            audioSource.clip = GetAudioClip(sound);
-            audioSource.maxDistance = radius;
+            GameAssets.SoundAudioClip AudioClipObject = GetAudioClipObject(sound);
+            audioSource.clip = AudioClipObject.audio;
+            audioSource.volume = AudioClipObject.volume;
+            audioSource.pitch = AudioClipObject.pitch;
+            //audioSource.maxDistance = radius;
             audioSource.spatialBlend = 1f;
             //Falta regular el volumen
             audioSource.Play();
@@ -44,27 +58,55 @@ public static class AudioManager
         }
     }
 
+    public static void PlayAsBackground(Sound sound)
+    {
+        if(backgroundAudioObject == null)
+        {
+            backgroundAudioObject = new GameObject("BackGround Music");
+            backgroundAudioSource = backgroundAudioObject.AddComponent<AudioSource>();
+        }
+
+        if (backgroundAudioSource.isPlaying)
+            backgroundAudioSource.Stop();
+
+        backgroundAudioSource.PlayOneShot(GetAudioClip(sound, true));
+    }
+
     //Audio 2D, como el background
     public static void PlaySound(Sound sound)
     {
-        if (canPlay(sound))
+        if (CanPlay(sound))
         {
-             if(u_AudioGameObject == null)
+
+            if (u_AudioGameObject == null)
             {
                 u_AudioGameObject = new GameObject("Unique Sound Object");
                 u_AudioSource = u_AudioGameObject.AddComponent<AudioSource>();
             }
 
-            u_AudioSource.PlayOneShot(GetAudioClip(sound));
+            u_AudioSource.PlayOneShot(GetAudioClip(sound,false));
+
         }
     }
 
-    private static AudioClip GetAudioClip(Sound sound)
+    private static AudioClip GetAudioClip(Sound sound, bool background)
     {
-        foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.instance.soundsArray)
+        foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundsArray)
         {
             if(soundAudioClip.sound == sound)
             {
+                if (background)
+                {
+                    backgroundAudioSource.volume = soundAudioClip.volume;
+                    backgroundAudioSource.pitch = soundAudioClip.pitch;
+                }
+                else
+                {
+                    u_AudioSource.volume = soundAudioClip.volume;
+                    u_AudioSource.pitch = soundAudioClip.pitch;
+                }
+
+
                 return soundAudioClip.audio;
             }
         }
@@ -74,9 +116,20 @@ public static class AudioManager
         return null;
     }
 
+    private static GameAssets.SoundAudioClip GetAudioClipObject(Sound sound)
+    {
+        foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundsArray)
+        {
+            if (soundAudioClip.sound == sound)
+            {
+                return soundAudioClip;
+            }
+        }
+        return null;
+    }
 
     //Se puede usar en caso de que querramos agregar restricciones de que tan frecuente debe sonar un sonido
-    private static bool canPlay(Sound sound)
+    private static bool CanPlay(Sound sound)
     {
         switch (sound)
         {

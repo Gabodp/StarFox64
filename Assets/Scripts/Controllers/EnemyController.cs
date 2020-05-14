@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void ExplodeSequence()
     {
         GameObject obj = Instantiate(explosion, transform.position, Quaternion.identity);
-        AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion);
+        AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion,transform.position,10.0f);
         Destroy(this.gameObject,0.2f);
         Destroy(obj, 1.5f);
     }

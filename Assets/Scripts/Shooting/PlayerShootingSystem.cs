@@ -64,7 +64,7 @@ public class PlayerShootingSystem : BaseShootingSystem
             {
                 GameObject proj = Instantiate(projectile, projectileSpawns[i].transform.position, transform.rotation) as GameObject;
                 proj.GetComponent<BaseProjectile>().FireProjectile(projectileSpawns[i], target, damage, fireRate);
-                AudioManager.PlaySound(AudioManager.Sound.PlayerLaser);
+                AudioManager.PlaySound(AudioManager.Sound.PlayerLaser,transform.position,10.0f);
                 
                 m_lastProjectiles.Add(proj);
             }

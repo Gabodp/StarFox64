@@ -1,0 +1,132 @@
+newmtl Aluminium0
+Ka 0 0 0
+Ns 1.82212
+Ks 1 1 1
+Kd 0.647059 0.647059 0.647059
+map_Kd Aluminium0.jpg
+newmtl Real_Steel_Plate
+Ka 0 0 0
+Ns 1
+Ks 0.741176 0.870588 0.964706
+Kd 0.520777 0.600349 0.494257
+map_Kd Real_Steel_Plate_1.jpg
+newmtl BlackInodizedAl0
+Ka 0 0 0
+Ns 3.47873
+Ks 1 1 1
+Kd 0.198039 0.198039 0.198039
+map_Kd BlackInodizedAl0_2.jpg
+newmtl IC_BLUE
+Ka 0 0 0
+Ns 4.75882
+Ks 0 0.0823529 0.596078
+Kd 0 0.0823529 0.596079
+map_Kd IC_BLUE_3.jpg
+newmtl Aluminium1
+Ka 0 0 0
+Ns 1.82212
+Ks 1 1 1
+Kd 0.647059 0.647059 0.647059
+map_Kd Aluminium1_4.jpg
+newmtl White_porcelain0
+Ka 0 0 0
+Ns 164.022
+Ks 1 1 1
+Kd 0.862745 0.866667 0.905882
+map_Kd White_porcelain0_5.jpg
+newmtl Flat_gray
+Ka 0 0 0
+Ns 8.16617
+Ks 1 1 1
+Kd 0.501961 0.501961 0.501961
+map_Kd Flat_gray_6.jpg
+newmtl IC_GREYDARK
+Ka 0 0 0
+Ns 3.12677
+Ks 0.196078 0.196078 0.196078
+Kd 0.168628 0.168628 0.168628
+map_Kd IC_GREYDARK_7.jpg
+newmtl Flat_white0
+Ka 0 0 0
+Ns 8.16617
+Ks 1 1 1
+Kd 1 1 1
+map_Kd Flat_white0_8.jpg
+newmtl Pewter0
+Ka 0 0 0
+Ns 20.0855
+Ks 0.835294 0.921569 1
+Kd 0.603922 0.603922 0.603922
+map_Kd Pewter0_9.jpg
+newmtl Brushed_silver0
+Ka 0 0 0
+Ns 3.32012
+Ks 1 0.788235 0.635294
+Kd 0 0 1
+map_Kd Brushed_silver0_10.jpg
+newmtl Red_plastic
+Ka 0 0 0
+Ns 13.1971
+Ks 1 1 1
+Kd 0.690196 0.215687 0.0117647
+map_Kd Red_plastic_11.jpg
+newmtl BlackInodizedAl1
+Ka 0 0 0
+Ns 3.47873
+Ks 1 1 1
+Kd 0.198039 0.198039 0.198039
+map_Kd BlackInodizedAl1_12.jpg
+newmtl Flat_white1
+Ka 0 0 0
+Ns 8.16617
+Ks 1 1 1
+Kd 1 1 1
+map_Kd Flat_white1_13.jpg
+newmtl Mercury
+Ka 0 0 0
+Ns 52.4573
+Ks 1 1 1
+Kd 0.745098 0.74902 0.752941
+map_Kd Mercury_14.jpg
+newmtl Brushed_silver1
+Ka 0 0 0
+Ns 3.32012
+Ks 1 0.788235 0.635294
+Kd 0.749005 0.749005 0.749005
+map_Kd Brushed_silver1_15.jpg
+newmtl Pottery_clay
+Ka 0 0 0
+Ns 2.31637
+Ks 0.129412 0.129412 0.129412
+Kd 0.027451 0.027451 0.027451
+map_Kd Pottery_clay_16.jpg
+newmtl Pseudo_Metal
+Ka 0 0 0
+Ns 1
+Ks 0.741176 0.870588 0.964706
+Kd 0.524674 0.606058 0.48449
+map_Kd Pseudo_Metal_17.jpg
+newmtl Pewter1
+Ka 0 0 0
+Ns 20.0855
+Ks 0.835294 0.921569 1
+Kd 0.603922 0.603922 0.603922
+map_Kd Pewter1_18.jpg
+newmtl Red_metal
+Ka 0 0 0
+Ns 46.5255
+Ks 1 1 1
+Kd 1 0.152941 0.133333
+map_Kd Red_metal_19.jpg
+newmtl Metallic_Varnish
+Ka 0 0 0
+Ns 6.04965
+Ks 0.733333 0.92549 1
+Kd 0 0 0.0784314
+map_Kd Metallic_Varnish_20.jpg
+newmtl White_porcelain1
+Ka 0 0 0
+Ns 164.022
+Ks 1 1 1
+Kd 0.862745 0.866667 0.905882
+map_Kd White_porcelain1_21.jpg

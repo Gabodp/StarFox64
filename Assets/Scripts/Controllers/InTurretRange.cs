@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
-public class InRange : MonoBehaviour
+public class InTurretRange : MonoBehaviour
 {
     private TurretController controller;
 

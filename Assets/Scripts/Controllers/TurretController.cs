@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class TurretController : EnemyController
@@ -25,4 +24,6 @@ public class TurretController : EnemyController
         s_system.SetTarget(null);
         //s_system.RemoveLastProjectiles();//ENCARGADO DE BORRAR GAMEOBJECTS BALAS
     }
+
+    //AGREGAR LASER PUNTERO PARAR MAYOR DIVERSION
 }

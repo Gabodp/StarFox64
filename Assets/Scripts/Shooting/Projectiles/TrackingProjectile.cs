@@ -58,7 +58,8 @@ public class TrackingProjectile : BaseProjectile
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -73,7 +74,6 @@ public class TrackingProjectile : BaseProjectile
     {
         GameObject explosionObject = Instantiate(explosion, transform.position, Quaternion.identity);
 
-        //Agregar shake a la camara
         GameController.Instance.ShakeCamera(4.0f, 1f);
         Destroy(gameObject);
         Destroy(explosionObject, 1.5f);

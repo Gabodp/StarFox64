@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public CinemachineDollyCart dolly_cart;
     public float speed;
     private readonly float lookSpeed = 8000;
-    private float moveForwardSpeed = 12.0f;
+    private float moveForwardSpeed = 22.0f;
 
     public Transform aimTargetRotation;
     public Transform aimTarget;
@@ -118,18 +118,20 @@ public class PlayerController : MonoBehaviour
     {
         float newForwardSpeed = activated ? moveForwardSpeed * 2 : moveForwardSpeed;
         float zoom = activated ? -4 : 0;
-
+        float fov = activated ? 75 : 65;
         DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
         GameController.Instance.SetCameraZoom(zoom, 0.5f);
+        GameController.Instance.FieldOfView(fov);
     }
 
     private void Brake(bool activated)
     {
         float newForwardSpeed = activated ? moveForwardSpeed * 0.60f : moveForwardSpeed;
         float zoom = activated ? 2 : 0;
-
+        float fov = activated ? 50 : 65;
         DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
         GameController.Instance.SetCameraZoom(zoom, 0.3f);
+        GameController.Instance.FieldOfView(fov);
     }
 
     void BarrelRoll(int direction)

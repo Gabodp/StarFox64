@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public bool godMode;
     public GameObject CameraHolder;
     public CameraShake CameraShaker;
+    private AudioManager.Sound backgroundMusic;//Se puede cambiar
 
     private int lifePoints;
     private float tiempo;
@@ -29,7 +30,8 @@ public class GameController : MonoBehaviour
         lifePoints = 80;
         tiempo = 0;
         godMode = false;
-
+        backgroundMusic = AudioManager.Sound.Background;
+        AudioManager.PlayAsBackground(backgroundMusic);
     }
 
     // Update is called once per frame
@@ -53,7 +55,7 @@ public class GameController : MonoBehaviour
         CameraHolder.transform.DOLocalMove(new Vector3(0, 0, zoom), duration);
     }
 
-    void FieldOfView(float fov)
+    public void FieldOfView(float fov)
     {
         CameraHolder.GetComponentInChildren<CinemachineVirtualCamera>().m_Lens.FieldOfView = fov;
     }
@@ -61,5 +63,11 @@ public class GameController : MonoBehaviour
     public void ShakeCamera(float magnitude , float duration)
     {
         CameraShaker.ShakeCamera(magnitude, duration);
+    }
+
+    public void SetBackgroundMusic(AudioManager.Sound sound)
+    {
+        backgroundMusic = sound;
+        AudioManager.PlayAsBackground(backgroundMusic);
     }
 }
