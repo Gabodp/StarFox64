@@ -7,6 +7,10 @@ public class NormalProjectile : BaseProjectile
     Vector3 direction;
     bool fire;
 
+    private void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
     private void Update()
     {
         if (fire)

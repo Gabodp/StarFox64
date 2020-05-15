@@ -8,6 +8,11 @@ public class PlayerProjectile : BaseProjectile
     Vector3 direction;
     public bool fire;
 
+    private void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
+
     private void Update()
     {
         if (fire)
@@ -28,10 +33,10 @@ public class PlayerProjectile : BaseProjectile
     private void OnTriggerEnter(Collider other)
     {
         
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.CompareTag("Enemy"))
         {
             print("Choco con enemigo");
-            other.gameObject.GetComponentInParent<EnemyController>().ReceiveDamage(10);
+            other.gameObject.GetComponentInParent<EnemyController>().ReceiveDamage(damage);
             Destroy(this.gameObject);
         }
         

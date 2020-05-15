@@ -10,8 +10,9 @@ public class GameController : MonoBehaviour
     public bool godMode;
     public GameObject CameraHolder;
     public CameraShake CameraShaker;
-    private AudioManager.Sound backgroundMusic;//Se puede cambiar
+    public LevelLoader loader;
 
+    private AudioManager.Sound backgroundMusic;//Se puede cambiar
     private int lifePoints;
     private float tiempo;
     private void Awake()

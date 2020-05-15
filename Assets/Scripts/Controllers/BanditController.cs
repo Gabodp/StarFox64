@@ -10,7 +10,7 @@ public class BanditController : EnemyController
     public float posY;
     public float zDistance;
 
-    private const float timeToLeave = 6.0f;
+    private const float timeToLeave = 8.0f;
     private Sequence mySequence;
     private TrackingSystem t_system;
 
@@ -42,11 +42,11 @@ public class BanditController : EnemyController
 
     }
 
-    public void ActivateEnemy(GameObject player)
+    public void ActivateBandit(GameObject player)
     {
         mySequence.Kill();
         DoAnimation();
-        t_system.SetTarget(player);
+        t_system.SetTarget(player.transform.GetChild(2).gameObject);//Le asignas el nuevo centro del jugador
         s_system.SetTarget(player);
         transform.SetParent(player.transform.parent);
     }

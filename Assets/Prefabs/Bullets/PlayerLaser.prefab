@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 60
   damage: 10
+  lifeTime: 2.5
   fire: 0
 --- !u!54 &5805064025215277101
 Rigidbody:

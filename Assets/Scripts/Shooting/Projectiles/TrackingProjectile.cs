@@ -6,7 +6,6 @@ public class TrackingProjectile : BaseProjectile
 {
 
     private GameObject target;
-    private float timer;
     private float timestamp;
     private Vector3 direction;
     private Quaternion lookRotation;
@@ -17,8 +16,8 @@ public class TrackingProjectile : BaseProjectile
     private void Start()
     {
         timestamp = 0.0f;
-        timer = 6.0f;
         rotateSpeed = 6.0f;
+        Destroy(gameObject, lifeTime);
     }
 
     private void Update()
@@ -37,8 +36,6 @@ public class TrackingProjectile : BaseProjectile
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
 
-                if (timestamp >= timer)
-                    Explode();
             }
             else
             {
@@ -63,7 +60,7 @@ public class TrackingProjectile : BaseProjectile
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("Entro");
+            print("Explodes homing missile");
             Explode();
             target = null;
         }

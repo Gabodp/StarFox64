@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     //public bool targetable;
     public GameObject explosion;
 
+    private bool alive;
     protected EnemyShootingSystem s_system;
 
     private int baseLifePoints;
@@ -18,10 +19,12 @@ public class EnemyController : MonoBehaviour
     {
         s_system = GetComponent<EnemyShootingSystem>(); 
         baseLifePoints = lifePoints;
+        alive = true;
     }
 
     protected virtual void ExplodeSequence()
     {
+        alive = false;
         GameObject obj = Instantiate(explosion, transform.position, Quaternion.identity);
         AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion,transform.position,10.0f);
         Destroy(this.gameObject,0.2f);
@@ -37,7 +40,7 @@ public class EnemyController : MonoBehaviour
             lifePoints = Mathf.Clamp(lifePoints, 0, baseLifePoints);
         }
         
-        if(lifePoints == 0) 
+        if(lifePoints == 0 && alive) 
             ExplodeSequence();
       
     }

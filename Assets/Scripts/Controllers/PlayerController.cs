@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public CinemachineDollyCart dolly_cart;
     public float speed;
     private readonly float lookSpeed = 8000;
-    private float moveForwardSpeed = 22.0f;
+    private readonly float moveForwardSpeed = 22.0f;
 
     public Transform aimTargetRotation;
     public Transform aimTarget;

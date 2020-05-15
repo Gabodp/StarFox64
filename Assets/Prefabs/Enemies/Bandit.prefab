@@ -48,11 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifePoints: 20
   scoreValue: 1
-  targetable: 1
   explosion: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   posX: 0
   posY: 0
   zDistance: 0
+  newAim: 0
+  center: {fileID: 0}
 --- !u!65 &4225037057387970571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e271ed351cd2439ec2ec96bfd8f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 80
+  speed: 100
   xAxisFOV: 180
   yAxisFOV: 180
   zAxisFOV: 180
@@ -145,7 +146,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnProjectile
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -157,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4225037057740274644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4225037057421084928}
