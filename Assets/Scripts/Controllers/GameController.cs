@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public GameObject CameraHolder;
     public CameraShake CameraShaker;
     public LevelLoader loader;
+    public HealthBar healthBar;
 
     private AudioManager.Sound backgroundMusic;//Se puede cambiar
     private int lifePoints;
@@ -28,7 +29,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lifePoints = 80;
+        lifePoints = 100;
+        healthBar.SetHealth(this.lifePoints);
         tiempo = 0;
         godMode = false;
         backgroundMusic = AudioManager.Sound.Background;
@@ -49,6 +51,7 @@ public class GameController : MonoBehaviour
         if (godMode) return;
 
         this.lifePoints = Mathf.Clamp(this.lifePoints + value, 0, 100);
+        healthBar.SetHealth(this.lifePoints);
     }
 
     public void SetCameraZoom(float zoom, float duration)
