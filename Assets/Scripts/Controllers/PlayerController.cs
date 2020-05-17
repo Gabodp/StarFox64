@@ -117,24 +117,29 @@ public class PlayerController : MonoBehaviour
     private void SpeedUp(bool activated)
     {
         float newForwardSpeed = activated ? moveForwardSpeed * 2 : moveForwardSpeed;
-        float zoom = activated ? -4 : 0;
-        float fov = activated ? 75 : 65;
+        float zoom = activated ? -3 : 0;
+        float fov_start = activated ? 65 : 75;
+        float fov_end = activated ? 75 : 65;
         DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
+        DOVirtual.Float(fov_start, fov_end,.8f, GameController.Instance.FieldOfView);
+
         GameController.Instance.SetCameraZoom(zoom, 0.5f);
-        GameController.Instance.FieldOfView(fov);
+
     }
 
     private void Brake(bool activated)
     {
         float newForwardSpeed = activated ? moveForwardSpeed * 0.60f : moveForwardSpeed;
-        float zoom = activated ? 2 : 0;
-        float fov = activated ? 50 : 65;
+        float zoom = activated ? 1.5f : 0;
+        float fov_start = activated ? 65 : 55;
+        float fov_end = activated ? 55 : 65;
         DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
-        GameController.Instance.SetCameraZoom(zoom, 0.3f);
-        GameController.Instance.FieldOfView(fov);
+        DOVirtual.Float(fov_start, fov_end, .8f, GameController.Instance.FieldOfView);
+
+        GameController.Instance.SetCameraZoom(zoom, 0.5f);
     }
 
-    void BarrelRoll(int direction)
+    private void BarrelRoll(int direction)
     {
         if (!DOTween.IsTweening(player))
         {
@@ -144,7 +149,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetForwardSpeed(float newSpeed)
+    private void SetForwardSpeed(float newSpeed)
     {
         dolly_cart.m_Speed = newSpeed;
     }
