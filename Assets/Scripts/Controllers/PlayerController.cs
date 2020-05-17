@@ -173,4 +173,12 @@ public class PlayerController : MonoBehaviour
         //transform.localPosition = Vector3.zero;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            GameController.Instance.SetLifePoints(-10);
+        }
+    }
+
 }
