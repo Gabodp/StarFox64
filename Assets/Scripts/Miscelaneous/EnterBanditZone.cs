@@ -13,6 +13,7 @@ public class EnterBanditZone : MonoBehaviour
         {
             for(int i=0; i<bandits.Count; i++)
             {
+                if (bandits[i] == null) return;
                 bandits[i].GetComponent<BanditController>().ActivateBandit(other.gameObject);
             }
         }

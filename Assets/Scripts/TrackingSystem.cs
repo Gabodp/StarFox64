@@ -35,7 +35,8 @@ public class TrackingSystem : MonoBehaviour
             if(lastKnownPosition != target.transform.position)
             {
                 lastKnownPosition = target.transform.position;
-                target_lookAtRotation = Quaternion.LookRotation( lastKnownPosition - transform.position);
+                Debug.DrawLine(transform.position, target.transform.position, Color.red);
+                target_lookAtRotation = Quaternion.LookRotation( (lastKnownPosition - transform.position).normalized);
             }
 
             //Apply Rotation
@@ -48,7 +49,7 @@ public class TrackingSystem : MonoBehaviour
                 angles.x = Mathf.Clamp(angles.x, transform.localEulerAngles.x - xAxisFOV/2, transform.localEulerAngles.x + xAxisFOV/2);
                 angles.y = Mathf.Clamp(angles.y, transform.localEulerAngles.y - yAxisFOV/2, transform.localEulerAngles.y + yAxisFOV/2);
                 angles.z = Mathf.Clamp(angles.z, transform.localEulerAngles.z - zAxisFOV/2, transform.localEulerAngles.z + zAxisFOV/2);
-                print(angles);
+                //print(angles);
                 transform.localEulerAngles = angles;
                 
             }

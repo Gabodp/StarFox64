@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
+  spawnBullet: {fileID: 1350996854}
   xAxisFOV: 180
   yAxisFOV: 180
   zAxisFOV: 180

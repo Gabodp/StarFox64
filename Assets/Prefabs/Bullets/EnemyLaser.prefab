@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3952979875367589539}
   m_Layer: 0
   m_Name: EnemyLaser
-  m_TagString: PlayerShot
+  m_TagString: EnemyShot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b87362ca06c2a46909d76b77082dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 100
   damage: 5
-  lifeTime: 3
+  lifeTime: 2.5
 --- !u!54 &5805064025215277101
 Rigidbody:
   m_ObjectHideFlags: 0
