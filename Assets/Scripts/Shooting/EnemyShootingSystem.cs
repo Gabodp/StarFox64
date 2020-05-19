@@ -42,7 +42,7 @@ public class EnemyShootingSystem : BaseShootingSystem
                 //Quaternion.Euler(projectileSpawns[i].transform.forward)
                 GameObject proj = Instantiate(projectile, projectileSpawns[i].transform.position, projectileSpawns[i].transform.rotation) as GameObject;
                 proj.GetComponent<BaseProjectile>().FireProjectile(projectileSpawns[i], target, damage, fireRate);
-
+                
                 m_lastProjectiles.Add(proj);
             }
         }
@@ -64,6 +64,5 @@ public class EnemyShootingSystem : BaseShootingSystem
 
         return true;
     }
-
 
 }

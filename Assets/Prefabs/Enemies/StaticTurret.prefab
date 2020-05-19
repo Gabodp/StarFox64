@@ -132,8 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e271ed351cd2439ec2ec96bfd8f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
-  spawnBullet: {fileID: 1350996854}
+  speed: 60
   xAxisFOV: 180
   yAxisFOV: 180
   zAxisFOV: 180
@@ -212,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032775c1878573d44a4e4577417cc3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 10
+  fireRate: 5
   damage: 5
   projectile: {fileID: 2438652186971646952, guid: f904ba9b999826f4f83df8237d3d5b48,
     type: 3}

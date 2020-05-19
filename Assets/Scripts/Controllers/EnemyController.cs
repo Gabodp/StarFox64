@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     {
         alive = false;
         GameObject obj = Instantiate(explosion, transform.position, Quaternion.identity);
-        AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion,transform.position,10.0f);
+        AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion);
         Destroy(this.gameObject,0.2f);
         Destroy(obj, 1.5f);
     }

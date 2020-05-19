@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     private void SpeedUp(bool activated)
     {
         if (activated)
-            GameController.Instance.ShakeCamera(3.0f, 0.25f);
+            GameController.Instance.ShakeCamera(5.0f, 0.4f);
 
         boosting = activated;
         float newForwardSpeed = activated ? moveForwardSpeed * 2 : moveForwardSpeed;

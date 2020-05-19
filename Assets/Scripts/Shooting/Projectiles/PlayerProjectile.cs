@@ -25,6 +25,7 @@ public class PlayerProjectile : BaseProjectile
     {
         if (launcher)
         {
+            AudioManager.PlaySound(shotSound);
             direction = launcher.transform.forward;
             fire = true;
         }

@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections;
 using UnityEngine;
 
 public class TurretController : EnemyController
@@ -14,8 +14,9 @@ public class TurretController : EnemyController
     //Las funciones de abajo son llamadas por el script In Range de Turret
     public void EnemyInRange(GameObject p_target)
     {
+        StartCoroutine(ChargingTurret(p_target));
         t_system.SetTarget(p_target);
-        s_system.SetTarget(p_target);
+        //s_system.SetTarget(p_target);
     }
 
     public void EnemyOutOfRange()
@@ -26,4 +27,13 @@ public class TurretController : EnemyController
     }
 
     //AGREGAR LASER PUNTERO PARAR MAYOR DIVERSION
+
+    //Sirve para agregar un delay al primer disparo
+    IEnumerator ChargingTurret(GameObject target)
+    {
+        AudioManager.PlaySound(AudioManager.Sound.TurretTargeting);
+        yield return new WaitForSeconds(2.0f);
+        s_system.SetTarget(target);
+        
+    }
 }

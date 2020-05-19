@@ -15,6 +15,8 @@ public static class AudioManager
         Interruption,
         WarningAlarm,
         Phase2Giorno,
+        TurretLaunchMissile,
+        TurretTargeting,
     }
 
     //El diccionario puede cambiarse para que albergue una clase con config especifica de cada sonido
@@ -49,7 +51,7 @@ public static class AudioManager
             audioSource.clip = AudioClipObject.audio;
             audioSource.volume = AudioClipObject.volume;
             audioSource.pitch = AudioClipObject.pitch;
-            //audioSource.maxDistance = radius;
+            audioSource.maxDistance = radius;
             audioSource.spatialBlend = 1f;
             //Falta regular el volumen
             audioSource.Play();

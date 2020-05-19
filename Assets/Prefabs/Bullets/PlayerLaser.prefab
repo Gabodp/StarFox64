@@ -49,6 +49,7 @@ MonoBehaviour:
   speed: 80
   damage: 10
   lifeTime: 2.5
+  shotSound: 0
   fire: 0
 --- !u!54 &5805064025215277101
 Rigidbody:

@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b87362ca06c2a46909d76b77082dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 140
-  damage: 20
-  lifeTime: 4
+  speed: 200
+  damage: 25
+  lifeTime: 2
+  shotSound: 2
 --- !u!136 &67672390797309846
 CapsuleCollider:
   m_ObjectHideFlags: 0

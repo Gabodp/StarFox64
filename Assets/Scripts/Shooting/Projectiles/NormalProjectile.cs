@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class NormalProjectile : BaseProjectile
 {
-    Vector3 direction;
-    bool fire;
+    private Vector3 direction;
+    private bool fire;
 
+    
     private void Start()
     {
         Destroy(gameObject, lifeTime);
@@ -23,7 +24,7 @@ public class NormalProjectile : BaseProjectile
     {
         if(launcher && target)
         {
-            //direction = (target.transform.position - launcher.transform.position).normalized;
+            AudioManager.PlaySound(shotSound);
             direction = launcher.transform.forward;
             fire = true;
         }
