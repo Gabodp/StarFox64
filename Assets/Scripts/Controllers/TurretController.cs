@@ -4,6 +4,7 @@ using UnityEngine;
 public class TurretController : EnemyController
 {
     private TrackingSystem t_system;
+    public GameObject laserObject;
 
     protected override void Start()
     {
@@ -16,17 +17,16 @@ public class TurretController : EnemyController
     {
         StartCoroutine(ChargingTurret(p_target));
         t_system.SetTarget(p_target);
-        //s_system.SetTarget(p_target);
+        laserObject.SetActive(true);
     }
 
     public void EnemyOutOfRange()
     {
         t_system.SetTarget(null);
         s_system.SetTarget(null);
-        //s_system.RemoveLastProjectiles();//ENCARGADO DE BORRAR GAMEOBJECTS BALAS
+        laserObject.SetActive(false);
     }
 
-    //AGREGAR LASER PUNTERO PARAR MAYOR DIVERSION
 
     //Sirve para agregar un delay al primer disparo
     IEnumerator ChargingTurret(GameObject target)

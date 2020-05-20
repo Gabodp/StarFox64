@@ -730,7 +730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 26.600006}
+  m_AnchoredPosition: {x: 0.000061035156, y: 26.599976}
   m_SizeDelta: {x: -1085.27, y: -971.3}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!222 &1447495937514906003
@@ -1601,6 +1601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3028886802974975507}
   - component: {fileID: 2085437534268785668}
+  - component: {fileID: 482512680}
   m_Layer: 5
   m_Name: Health Bar
   m_TagString: Untagged
@@ -1626,7 +1627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -748, y: 441.7}
+  m_AnchoredPosition: {x: -300, y: 140}
   m_SizeDelta: {x: 190.75, y: 25.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085437534268785668
@@ -1681,6 +1682,49 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &482512680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051808281719811442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad0f763456139842b5d301727408cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 2085437534268785668}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0.9048885, b: 0, a: 1}
+    key2: {r: 0.98823535, g: 0.9058824, b: 0, a: 0}
+    key3: {r: 0, g: 0.8584906, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 25829
+    ctime2: 41441
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  fill: {fileID: 7556265989424727582}
 --- !u!1 &6220021725684831215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1834,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -748.84, y: 410.9502}
+  m_AnchoredPosition: {x: -300, y: 110}
   m_SizeDelta: {x: 189.08, y: 14.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &417508752757010101
