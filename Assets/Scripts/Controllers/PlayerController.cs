@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private PlayerShootingSystem s_system;
     private Rigidbody rb;
     private int right,left;
+    private bool isControllable;
 
     public TrailRenderer[] trails;
 
@@ -27,12 +28,12 @@ public class PlayerController : MonoBehaviour
     private bool canBoost;
     private bool isRefilling;
     private float boostCapacity;
-    private float timeToNextBoost;
     private bool boosting;
 
     private void Start()
     {
         player = transform.GetChild(0);
+        isControllable = true;
         s_system = GetComponent<PlayerShootingSystem>();
         right = 0; left = 0;
         dolly_cart.m_Speed = moveForwardSpeed;
@@ -61,7 +62,6 @@ public class PlayerController : MonoBehaviour
             boostCapacity = Mathf.Clamp(boostCapacity - (Time.deltaTime * 20), 0f, 100f);//Esto hara que el tiempo maximo de boost sea de 5 segundos
             
             //Falta agregar linea para ir decrementando la barra de boost visualmente
-            print(boostCapacity);
 
             if (boostCapacity == 0f)
             {
@@ -72,11 +72,19 @@ public class PlayerController : MonoBehaviour
             }
                 
         }
+
+        if(dolly_cart.m_Position > 3300 && isControllable)
+        {
+            print("Entro");
+            isControllable = false;
+            GameController.Instance.loader.LoadNextLevel();
+        }
             
     }
 
     void KeyBoardInput()
     {
+
         if (Input.GetKeyDown(KeyCode.F))
             s_system.shootRockets = true;
         if (Input.GetKeyUp(KeyCode.F))

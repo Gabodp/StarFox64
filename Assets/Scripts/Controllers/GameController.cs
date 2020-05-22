@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public bool godMode;
-    public GameObject CameraHolder;
-    public CameraShake CameraShaker;
+    private GameObject CameraHolder;
+    private CameraShake CameraShaker;
     public LevelLoader loader;
-    public HealthBar healthBar;
+    private HealthBar healthBar;
 
+    private GameObject GamePlane;
     private AudioManager.Sound backgroundMusic;//Se puede cambiar
     private int lifePoints;
-    private float tiempo;
+
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -26,22 +28,44 @@ public class GameController : MonoBehaviour
 
         AudioManager.Initialize();
     }
-    // Start is called before the first frame update
+
+    private void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene,LoadSceneMode mode)
+    {
+        Debug.Log("Onsceneloaded called");
+        if(scene.buildIndex == 1 || scene.buildIndex == 2)
+        {
+            GetGameObjects();
+            backgroundMusic = AudioManager.Sound.Background;
+            AudioManager.PlayAsBackground(backgroundMusic);
+        }
+    }
+
     void Start()
     {
         lifePoints = 100;
         healthBar.SetHealth(this.lifePoints);
-        tiempo = 0;
         godMode = false;
-        backgroundMusic = AudioManager.Sound.Background;
-        AudioManager.PlayAsBackground(backgroundMusic);
+        
     }
 
-    // Update is called once per frame
+    public void GetGameObjects()
+    {
+        print("Consiguio los objetos");
+        GamePlane = GameObject.Find("GamePlane");
+        loader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+        CameraHolder = GamePlane.transform.Find("CameraParent").gameObject;
+        CameraShaker = CameraHolder.GetComponentInChildren<CameraShake>();
+        healthBar = GameObject.Find("Canvas").GetComponentInChildren<HealthBar>();
+    }
+
     void Update()
     {
-        tiempo += Time.deltaTime;
-
         if (Input.GetKeyDown(KeyCode.G))
             godMode = !godMode;
     }

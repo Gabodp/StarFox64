@@ -70,7 +70,7 @@ MonoBehaviour:
     pitch: 1
   - sound: 1
     audio: {fileID: 8300000, guid: e3362fe1d49511c46b5dea65964cd9ef, type: 3}
-    volume: 0.4
+    volume: 0.25
     pitch: 1
   - sound: 8
     audio: {fileID: 8300000, guid: 68703ab5159ae6b4ab8b8c5fef49625d, type: 3}
