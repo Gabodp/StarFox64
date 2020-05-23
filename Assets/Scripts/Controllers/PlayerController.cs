@@ -149,7 +149,11 @@ public class PlayerController : MonoBehaviour
     private void SpeedUp(bool activated)
     {
         if (activated)
+        {
             GameController.Instance.ShakeCamera(5.0f, 0.4f);
+            AudioManager.PlaySound(AudioManager.Sound.SpeedUp);
+        }
+            
 
         boosting = activated;
         float newForwardSpeed = activated ? moveForwardSpeed * 2 : moveForwardSpeed;
@@ -236,7 +240,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("EnemyShot"))
         {
             GameController.Instance.SetLifePoints(-other.gameObject.GetComponent<BaseProjectile>().damage);
-        }
+        }else if (other.CompareTag("Booster"))
+            DOVirtual.Float(dolly_cart.m_Speed, moveForwardSpeed * 5, .4f, SetForwardSpeed);
     }
 
 }

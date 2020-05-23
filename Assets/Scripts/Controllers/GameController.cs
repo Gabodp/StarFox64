@@ -54,6 +54,21 @@ public class GameController : MonoBehaviour
         
     }
 
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+            godMode = !godMode;
+        if (godMode)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                loader.LoadNextLevel();
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                loader.LoadPreviousLevel();
+        }
+    }
+
     public void GetGameObjects()
     {
         print("Consiguio los objetos");
@@ -62,12 +77,6 @@ public class GameController : MonoBehaviour
         CameraHolder = GamePlane.transform.Find("CameraParent").gameObject;
         CameraShaker = CameraHolder.GetComponentInChildren<CameraShake>();
         healthBar = GameObject.Find("Canvas").GetComponentInChildren<HealthBar>();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-            godMode = !godMode;
     }
 
     public void SetLifePoints(int value)

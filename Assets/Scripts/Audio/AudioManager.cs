@@ -17,6 +17,8 @@ public static class AudioManager
         Phase2Giorno,
         TurretLaunchMissile,
         TurretTargeting,
+        SpeedUp,
+        BoosterRing,
     }
 
     //El diccionario puede cambiarse para que albergue una clase con config especifica de cada sonido

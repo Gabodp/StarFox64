@@ -50,23 +50,23 @@ MonoBehaviour:
     pitch: 1
   - sound: 2
     audio: {fileID: 8300000, guid: 8b4f0ec3046456a44bd3652172896ada, type: 3}
-    volume: 0.45
+    volume: 0.5
     pitch: 1
   - sound: 4
     audio: {fileID: 8300000, guid: 5de2745929e886b4fa8cb8c5a52132a0, type: 3}
-    volume: 0.8
+    volume: 0.65
     pitch: 1
   - sound: 5
     audio: {fileID: 8300000, guid: ae0c48f68b1418c48ac24c339fafc7ed, type: 3}
-    volume: 0.8
+    volume: 0.7
     pitch: 1
   - sound: 7
     audio: {fileID: 8300000, guid: 1914165a483cfa3478fb996b1b9b8a13, type: 3}
-    volume: 0.8
+    volume: 0.7
     pitch: 1
   - sound: 6
     audio: {fileID: 8300000, guid: 88262081cac46a4438a2be5d0764d9e2, type: 3}
-    volume: 0.8
+    volume: 0.7
     pitch: 1
   - sound: 1
     audio: {fileID: 8300000, guid: e3362fe1d49511c46b5dea65964cd9ef, type: 3}
@@ -74,9 +74,13 @@ MonoBehaviour:
     pitch: 1
   - sound: 8
     audio: {fileID: 8300000, guid: 68703ab5159ae6b4ab8b8c5fef49625d, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
   - sound: 9
     audio: {fileID: 8300000, guid: 5a68223a29d35f2468af34f8efad09b0, type: 3}
     volume: 0.85
+    pitch: 1
+  - sound: 10
+    audio: {fileID: 8300000, guid: 36ecbf793c8ea0b48b43f6bb13fbdbab, type: 3}
+    volume: 0.6
     pitch: 1
