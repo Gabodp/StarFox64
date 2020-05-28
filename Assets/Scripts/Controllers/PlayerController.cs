@@ -12,15 +12,17 @@ public class PlayerController : MonoBehaviour
     //Basic Parameters
     public CinemachineDollyCart dolly_cart;
     public float speed;
-    
+    public GameObject explosion;
+
     private readonly float lookSpeed = 8000;
-    private readonly float moveForwardSpeed = 20.0f;
+    private float moveForwardSpeed = 20.0f;
 
     public Transform aimTargetRotation;
     private PlayerShootingSystem s_system;
     private Rigidbody rb;
     private int right,left;
-    private bool isControllable;
+    private bool canChangeScene;
+    private bool alive;
 
     public TrailRenderer[] trails;
 
@@ -33,7 +35,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         player = transform.GetChild(0);
-        isControllable = true;
+        canChangeScene = true;
+        alive = true;
         s_system = GetComponent<PlayerShootingSystem>();
         right = 0; left = 0;
         dolly_cart.m_Speed = moveForwardSpeed;
@@ -47,6 +50,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (!alive) return;
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
@@ -65,22 +70,22 @@ public class PlayerController : MonoBehaviour
             GameController.Instance.SetBoostPoints(boostCapacity);
             if (boostCapacity == 0f)
             {
-                print("Empieza el refill");
+
                 SpeedUp(false);
                 isRefilling = true;
+                //float refillTime = (100f - boostCapacity) / 5.f;
                 DOVirtual.Float(0f, 100f, 5f, RefillBoostTank).OnComplete(RefillFinished);
 
             }
                 
         }
 
-        if(dolly_cart.m_Position > 3300 && isControllable)
+        if (canChangeScene && dolly_cart.m_Position > GameController.Instance.GetPosToChangeLevel())
         {
-            print("Entro");
-            isControllable = false;
+            canChangeScene = false;
             GameController.Instance.loader.LoadNextLevel();
         }
-            
+
     }
 
     void KeyBoardInput()
@@ -164,6 +169,10 @@ public class PlayerController : MonoBehaviour
 
         float trail_start = activated ? 0.08f : 0.2f;
         float trail_end = activated ? 0.2f : 0.08f;
+
+        while (DOTween.IsTweening(dolly_cart.m_Speed))
+            print("Its tweening m_speed");
+
         DOVirtual.Float(trail_start, trail_end, 3f, SetTrailLength);
         DOVirtual.Float(dolly_cart.m_Speed, newForwardSpeed, .15f, SetForwardSpeed);
         DOVirtual.Float(fov_start, fov_end,.8f, GameController.Instance.FieldOfView);
@@ -195,6 +204,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StopPlaying()
+    {
+        alive = false;
+        GameObject obj = Instantiate(explosion, transform.position, Quaternion.identity);
+        AudioManager.PlaySound(AudioManager.Sound.DestroyExplosion);
+        //Destroy(this.gameObject, 0.2f);
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        
+        Destroy(obj, 1f);
+        
+    }
+
     private void RefillBoostTank(float value)
     {
         boostCapacity = value;
@@ -222,7 +245,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //rb.velocity = Vector3.zero;
+
         print(collision.gameObject.name);
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOLocalMove(Vector3.zero, 1.5f));
@@ -230,8 +253,11 @@ public class PlayerController : MonoBehaviour
         mySequence.OnComplete(StopRotating);
         mySequence.Play();
 
-        if(collision.gameObject.CompareTag("Terrain"))
-            GameController.Instance.SetLifePoints(-30);
+        if (collision.gameObject.CompareTag("Terrain"))
+            GameController.Instance.SetLifePoints(-25);
+        else if(collision.gameObject.CompareTag("Building") || collision.gameObject.CompareTag("Enemy"))
+            GameController.Instance.SetLifePoints(-20);
+
     }
 
     private void StopRotating()
@@ -245,9 +271,13 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("EnemyShot"))
         {
+            print("hit");
             GameController.Instance.SetLifePoints(-other.gameObject.GetComponent<BaseProjectile>().damage);
-        }else if (other.CompareTag("Booster"))
-            DOVirtual.Float(dolly_cart.m_Speed, moveForwardSpeed * 5, .4f, SetForwardSpeed);
+        }
+        else if (other.CompareTag("Booster")) {
+            moveForwardSpeed = 100.0f;
+            DOVirtual.Float(dolly_cart.m_Speed, moveForwardSpeed, .5f, SetForwardSpeed);
+        }
     }
 
 }

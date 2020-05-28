@@ -68,6 +68,7 @@ public static class AudioManager
         {
             backgroundAudioObject = new GameObject("BackGround Music");
             backgroundAudioSource = backgroundAudioObject.AddComponent<AudioSource>();
+            //agregar volumen
         }
 
         if (backgroundAudioSource.isPlaying)
@@ -93,7 +94,7 @@ public static class AudioManager
         }
     }
 
-    private static AudioClip GetAudioClip(Sound sound, bool background)
+    public static AudioClip GetAudioClip(Sound sound, bool background)
     {
         foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundsArray)
         {
@@ -101,6 +102,7 @@ public static class AudioManager
             {
                 if (background)
                 {
+                    //cambiar volumen por el del gamecontroller
                     backgroundAudioSource.volume = soundAudioClip.volume;
                     backgroundAudioSource.pitch = soundAudioClip.pitch;
                 }

@@ -86,5 +86,5 @@ MonoBehaviour:
     pitch: 1
   - sound: 3
     audio: {fileID: 8300000, guid: e2fe408591ff90b43af4d88bb70971fa, type: 3}
-    volume: 0.25
+    volume: 0.3
     pitch: 1

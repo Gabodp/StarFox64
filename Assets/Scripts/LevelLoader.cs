@@ -14,6 +14,16 @@ public class LevelLoader : MonoBehaviour
         num_scenes = SceneManager.sceneCountInBuildSettings;
     }
 
+    public void LoadMainMenu()
+    {
+        StartCoroutine(LoadLevel(0));
+    }
+
+    public void RestarLevel()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    }
+
     public void LoadNextLevel()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
