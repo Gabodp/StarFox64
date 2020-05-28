@@ -42,8 +42,7 @@ public class RingCollectible : Collectible
             
             mySequence.Append(transform.DOScale(1.5f, 1.0f));
             mySequence.Append(transform.DOScale(0.1f, 0.8f));
-            //mySequence.Append( render.material.DOFade(0.0f, 0.5f)); Falta hacer fade
-            mySequence.Insert(0,transform.DOLocalRotate(new Vector3(transform.localEulerAngles.x, 900, transform.localEulerAngles.z), 1.8f, RotateMode.LocalAxisAdd).SetEase(Ease.OutSine));
+            mySequence.Insert(0,transform.DOLocalRotate(new Vector3(transform.localEulerAngles.x, 1080, transform.localEulerAngles.z), 1.8f, RotateMode.LocalAxisAdd).SetEase(Ease.OutSine));
             mySequence.Insert(0,transform.DOLocalMove(Vector3.zero, 0.4f));
             mySequence.OnComplete(Disappear);
         }
@@ -65,6 +64,7 @@ public class RingCollectible : Collectible
             DoAction();
             DoAnimation();
             taken = true;
+            AudioManager.PlaySound(AudioManager.Sound.RingCollected);
         }
     }
 

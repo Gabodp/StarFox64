@@ -60,15 +60,16 @@ public class PlayerController : MonoBehaviour
         if (boosting)
         {
             boostCapacity = Mathf.Clamp(boostCapacity - (Time.deltaTime * 20), 0f, 100f);//Esto hara que el tiempo maximo de boost sea de 5 segundos
-            
-            //Falta agregar linea para ir decrementando la barra de boost visualmente
 
+            //Falta agregar linea para ir decrementando la barra de boost visualmente
+            GameController.Instance.SetBoostPoints(boostCapacity);
             if (boostCapacity == 0f)
             {
                 print("Empieza el refill");
                 SpeedUp(false);
                 isRefilling = true;
                 DOVirtual.Float(0f, 100f, 5f, RefillBoostTank).OnComplete(RefillFinished);
+
             }
                 
         }
@@ -197,6 +198,8 @@ public class PlayerController : MonoBehaviour
     private void RefillBoostTank(float value)
     {
         boostCapacity = value;
+        GameController.Instance.SetBoostPoints(value);
+
     }
 
     private void RefillFinished()
@@ -220,12 +223,15 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //rb.velocity = Vector3.zero;
+        print(collision.gameObject.name);
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOLocalMove(Vector3.zero, 1.5f));
         mySequence.Insert(0,transform.DOLocalRotate(Vector3.zero, 1.5f));
         mySequence.OnComplete(StopRotating);
         mySequence.Play();
 
+        if(collision.gameObject.CompareTag("Terrain"))
+            GameController.Instance.SetLifePoints(-30);
     }
 
     private void StopRotating()

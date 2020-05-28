@@ -71,7 +71,7 @@ public class TrackingProjectile : BaseProjectile
     {
         GameObject explosionObject = Instantiate(explosion, transform.position, Quaternion.identity);
 
-        GameController.Instance.ShakeCamera(6.0f, 1f);
+        GameController.Instance.ShakeCamera(10.0f, 1.2f);
         Destroy(gameObject);
         Destroy(explosionObject, 1.5f);
     }

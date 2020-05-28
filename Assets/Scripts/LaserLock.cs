@@ -23,7 +23,7 @@ public class LaserLock : MonoBehaviour
             }
             else
             {
-                line.SetPosition(1, new Vector3(0, 0, 120));
+                line.SetPosition(1, new Vector3(0, 0, 140));
             }
         }
     }

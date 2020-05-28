@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     private CameraShake CameraShaker;
     public LevelLoader loader;
     private HealthBar healthBar;
+    private BoostBar boostBar;
 
     private GameObject GamePlane;
     private AudioManager.Sound backgroundMusic;//Se puede cambiar
@@ -54,8 +55,6 @@ public class GameController : MonoBehaviour
         
     }
 
-
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
@@ -77,6 +76,7 @@ public class GameController : MonoBehaviour
         CameraHolder = GamePlane.transform.Find("CameraParent").gameObject;
         CameraShaker = CameraHolder.GetComponentInChildren<CameraShake>();
         healthBar = GameObject.Find("Canvas").GetComponentInChildren<HealthBar>();
+        boostBar = GameObject.Find("Canvas").GetComponentInChildren<BoostBar>();
     }
 
     public void SetLifePoints(int value)
@@ -85,6 +85,11 @@ public class GameController : MonoBehaviour
 
         this.lifePoints = Mathf.Clamp(this.lifePoints + value, 0, 100);
         healthBar.SetHealth(this.lifePoints);
+    }
+
+    public void SetBoostPoints(float value)
+    {
+        boostBar.SetValue(value);
     }
 
     public void SetCameraZoom(float zoom, float duration)

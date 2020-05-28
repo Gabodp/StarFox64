@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 25, z: 80}
-  m_Center: {x: 0, y: 10, z: 40}
+  m_Size: {x: 80, y: 25, z: 140}
+  m_Center: {x: 0, y: 10, z: 70}
 --- !u!114 &1055765986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 5}
-  - {x: 0, y: 0, z: 80}
+  - {x: 0, y: 0, z: 140}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.7689894
@@ -180,8 +180,8 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 0.3529412}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 1, g: 0, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -197,7 +197,7 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 64379
-      atime2: 0
+      atime2: 65342
       atime3: 0
       atime4: 0
       atime5: 0
@@ -338,7 +338,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12, y: 8, z: 10}
+  m_Size: {x: 14, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4453353375013415146
 MonoBehaviour:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032775c1878573d44a4e4577417cc3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  fireRate: 3
   damage: 5
   projectile: {fileID: 2438652186971646952, guid: f904ba9b999826f4f83df8237d3d5b48,
     type: 3}

@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b87362ca06c2a46909d76b77082dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 160
-  damage: 25
+  speed: 180
+  damage: 40
   lifeTime: 2
-  shotSound: 2
+  shotSound: 8
 --- !u!136 &67672390797309846
 CapsuleCollider:
   m_ObjectHideFlags: 0

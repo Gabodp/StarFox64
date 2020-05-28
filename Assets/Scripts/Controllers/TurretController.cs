@@ -18,6 +18,7 @@ public class TurretController : EnemyController
         StartCoroutine(ChargingTurret(p_target));
         t_system.SetTarget(p_target);
         laserObject.SetActive(true);
+        print("en rango");
     }
 
     public void EnemyOutOfRange()
@@ -25,6 +26,7 @@ public class TurretController : EnemyController
         t_system.SetTarget(null);
         s_system.SetTarget(null);
         laserObject.SetActive(false);
+        print("fuera de rango");
     }
 
 
