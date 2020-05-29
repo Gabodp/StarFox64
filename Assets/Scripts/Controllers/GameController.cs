@@ -48,8 +48,13 @@ public class GameController : MonoBehaviour
             lifePoints = 100;
             backgroundMusic = AudioManager.Sound.Background;
             //AudioManager.PlayAsBackground(backgroundMusic);
-            if(bgMusicObject == null)
+            if(AudioManager.GetBGObject() == null)
+            {
                 bgMusicObject = GameObject.Instantiate(bgMusicPrefab) as GameObject;
+                AudioManager.SetBGObject(bgMusicObject);
+                AudioManager.SetAudioSourceBG(bgMusicObject.GetComponent<AudioSource>());
+            }
+                
         }
         GetLoader();
     }
@@ -144,7 +149,7 @@ public class GameController : MonoBehaviour
         backgroundMusic = sound;
         AudioManager.PlayAsBackground(backgroundMusic);
 
-        GameAssets.SoundAudioClip sac = AudioManager.GetSoundAudioClip(sound);
+        /*GameAssets.SoundAudioClip sac = AudioManager.GetSoundAudioClip(sound);
         AudioSource source = bgMusicObject.GetComponent<AudioSource>();
         if (source.isPlaying)
             source.Stop();
@@ -152,7 +157,7 @@ public class GameController : MonoBehaviour
         source.volume = sac.volume;
         source.pitch = sac.pitch;
 
-        source.PlayOneShot(sac.audio);
+        source.PlayOneShot(sac.audio);*/
     }
 
     public float GetPosToChangeLevel()

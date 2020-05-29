@@ -66,6 +66,7 @@ public static class AudioManager
     {
         if(backgroundAudioObject == null)
         {
+            Debug.Log("entro a null");
             backgroundAudioObject = new GameObject("BackGround Music");
             backgroundAudioSource = backgroundAudioObject.AddComponent<AudioSource>();
             //agregar volumen
@@ -134,6 +135,22 @@ public static class AudioManager
 
         return null;
     }
+
+    public static GameObject GetBGObject()
+    {
+        return AudioManager.backgroundAudioObject;
+    }
+
+    public static void SetBGObject(GameObject bgObject)
+    {
+        AudioManager.backgroundAudioObject = bgObject;
+    }
+
+    public static void SetAudioSourceBG(AudioSource source)
+    {
+        AudioManager.backgroundAudioSource = source;
+    }
+
     private static GameAssets.SoundAudioClip GetAudioClipObject(Sound sound)
     {
         foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundsArray)

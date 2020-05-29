@@ -4836,7 +4836,7 @@ GameObject:
   - component: {fileID: 1470797949}
   m_Layer: 0
   m_Name: DeepSea
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7168,7 +7168,7 @@ GameObject:
   - component: {fileID: 3818361906903955299}
   m_Layer: 0
   m_Name: Water
-  m_TagString: Terrain
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
