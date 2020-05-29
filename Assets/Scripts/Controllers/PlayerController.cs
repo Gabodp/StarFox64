@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
@@ -59,16 +58,15 @@ public class PlayerController : MonoBehaviour
 
         XY_Move(horizontal, vertical, speed);
         RotationLook(horizontal, vertical, lookSpeed);
-        HorizontalLean(player, horizontal, 60, .1f);
+        LeanLateral(player, horizontal, 60, .1f);
         KeyBoardInput();
 
         if (boosting)
         {
             boostCapacity = Mathf.Clamp(boostCapacity - (Time.deltaTime * 20), 0f, 100f);//Esto hara que el tiempo maximo de boost sea de 5 segundos
 
-            //Falta agregar linea para ir decrementando la barra de boost visualmente
             GameController.Instance.SetBoostPoints(boostCapacity);
-            if (boostCapacity == 0f)
+            if (boostCapacity == 0f && !GameController.Instance.godMode)
             {
 
                 SpeedUp(false);
@@ -123,7 +121,7 @@ public class PlayerController : MonoBehaviour
     void XY_Move(float x, float y, float speed)
     {
         transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
-        ClampPos();
+        ClamPosToViewPort();
 
         if (right == 2)
             BarrelRoll(1);
@@ -131,25 +129,29 @@ public class PlayerController : MonoBehaviour
             BarrelRoll(-1);
     }
 
-    void ClampPos()
+    void ClamPosToViewPort()
     {
-        Vector3 position = Camera.main.WorldToViewportPoint(transform.position);
-        position.x = Mathf.Clamp(position.x,0.08f,0.92f);
-        position.y = Mathf.Clamp(position.y,0.08f,0.92f);
-        transform.position = Camera.main.ViewportToWorldPoint(position);
+        Vector3 newPos = Camera.main.WorldToViewportPoint(transform.position);
+        newPos.x = Mathf.Clamp(newPos.x,0.08f,0.92f);
+
+        newPos.y = Mathf.Clamp(newPos.y,0.08f,0.92f);
+
+        transform.position = Camera.main.ViewportToWorldPoint(newPos);
     }
 
-    void RotationLook(float h, float v, float speed)
+    void RotationLook(float horizontal, float vertical, float rotationSpeed)
     {
         aimTargetRotation.parent.position = Vector3.zero;
-        aimTargetRotation.localPosition = new Vector3(h, v, 3);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(aimTargetRotation.position), Mathf.Deg2Rad * speed * Time.deltaTime);
+
+        aimTargetRotation.localPosition = new Vector3(horizontal, vertical, 3.0f);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(aimTargetRotation.position), Mathf.Deg2Rad * rotationSpeed * Time.deltaTime);
     }
 
-    void HorizontalLean(Transform target, float axis, float leanLimit, float lerpTime)
+    void LeanLateral(Transform playerTransform, float axis, float rotationLimit, float lerpTime)
     {
-        Vector3 targetEulerAngels = target.localEulerAngles;
-        target.localEulerAngles = new Vector3(targetEulerAngels.x, targetEulerAngels.y, Mathf.LerpAngle(targetEulerAngels.z, -axis * leanLimit, lerpTime));
+        Vector3 targetEulerAngels = playerTransform.localEulerAngles;
+        playerTransform.localEulerAngles = new Vector3(targetEulerAngels.x, targetEulerAngels.y, Mathf.LerpAngle(targetEulerAngels.z, -axis * rotationLimit, lerpTime));
     }
 
     private void SpeedUp(bool activated)

@@ -391,7 +391,6 @@ GameObject:
   - component: {fileID: 494458400}
   - component: {fileID: 494458399}
   - component: {fileID: 494458398}
-  - component: {fileID: 494458397}
   m_Layer: 5
   m_Name: CanvasOptionsBG
   m_TagString: Untagged
@@ -399,21 +398,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &494458397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494458396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb2495a72828d044a59ef2734e1b5f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 54797f6302c758449be4380ea67955ad, type: 2}
-  pauseMenuUI: {fileID: 0}
-  slider: {fileID: 0}
 --- !u!114 &494458398
 MonoBehaviour:
   m_ObjectHideFlags: 0

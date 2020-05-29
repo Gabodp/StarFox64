@@ -117,11 +117,23 @@ public static class AudioManager
             }
         }
 
-        //Aqui no deberia llegar nunca, a menos que no exista ese nobmre de audio, pero como
+        //Aqui no deberia llegar nunca, a menos que no exista ese nombre de audio, pero como
         //usamos Enums, no pasara
         return null;
     }
 
+    public static GameAssets.SoundAudioClip GetSoundAudioClip(Sound sound)
+    {
+        foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundsArray)
+        {
+            if (soundAudioClip.sound == sound)
+            {
+                return soundAudioClip;
+            }
+        }
+
+        return null;
+    }
     private static GameAssets.SoundAudioClip GetAudioClipObject(Sound sound)
     {
         foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundsArray)

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
@@ -9,11 +8,14 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public bool godMode;
+    public GameObject bgMusicPrefab;
+
     private GameObject CameraHolder;
     private CameraShake CameraShaker;
     public LevelLoader loader;
     private HealthBar healthBar;
     private BoostBar boostBar;
+    private GameObject bgMusicObject;
 
     private GameObject GamePlane;
     private AudioManager.Sound backgroundMusic;//Se puede cambiar
@@ -45,7 +47,9 @@ public class GameController : MonoBehaviour
             GetGameObjects();
             lifePoints = 100;
             backgroundMusic = AudioManager.Sound.Background;
-            AudioManager.PlayAsBackground(backgroundMusic);
+            //AudioManager.PlayAsBackground(backgroundMusic);
+            if(bgMusicObject == null)
+                bgMusicObject = GameObject.Instantiate(bgMusicPrefab) as GameObject;
         }
         GetLoader();
     }
@@ -139,6 +143,16 @@ public class GameController : MonoBehaviour
     {
         backgroundMusic = sound;
         AudioManager.PlayAsBackground(backgroundMusic);
+
+        GameAssets.SoundAudioClip sac = AudioManager.GetSoundAudioClip(sound);
+        AudioSource source = bgMusicObject.GetComponent<AudioSource>();
+        if (source.isPlaying)
+            source.Stop();
+
+        source.volume = sac.volume;
+        source.pitch = sac.pitch;
+
+        source.PlayOneShot(sac.audio);
     }
 
     public float GetPosToChangeLevel()
